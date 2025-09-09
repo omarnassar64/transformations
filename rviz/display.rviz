@@ -1,0 +1,9 @@
+Fixed Frame: base_link
+
+Displays:
+  - Name: RobotModel
+    Type: rviz/RobotModel
+    Enabled: true
+    Robot Description: robot_description
+    Visual Enabled: true
+    Collision Enabled: false
