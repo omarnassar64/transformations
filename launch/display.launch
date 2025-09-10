@@ -1,0 +1,26 @@
+<launch>
+  <!-- Load XACRO into robot_description param -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find ae86_bot)/urdf/robot.xacro'" />
+
+  <!-- Publish joint states (simple publisher) -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
+
+  <!-- Publish TFs from URDF -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
+
+  <!-- Start Gazebo (empty world) -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <!-- Spawn the URDF model into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model ae86_bot"
+        output="screen"/>
+
+  <!-- Launch RViz with our config -->
+  <node name="rviz" pkg="rviz" type="rviz"
+        args="-d $(find ae86_bot)/rviz/display.rviz" required="true"/>
+</launch>

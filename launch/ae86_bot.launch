@@ -1,0 +1,26 @@
+<launch>
+  <!-- تحميل الـ xacro -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro '$(find ae86_bot)/urdf/ae86_bot.xacro'" />
+
+  <!-- تشغيل Gazebo بعالم فاضي -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <!-- إضافة الروبوت في Gazebo -->
+  <node name="spawn_ae86" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model ae86_bot"
+        respawn="false" output="screen"/>
+
+  <!-- Robot State Publisher علشان TF -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0"/>
+    <param name="use_tf_static" type="bool" value="true"/>
+  </node>
+
+  <!-- Joint State Publisher GUI (اختياري للتحكم في الوصلات) -->
+  <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" />
+
+  <!-- RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" output="screen" />
+</launch>
+
