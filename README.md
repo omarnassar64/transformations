@@ -40,11 +40,25 @@ pip install numpy matplotlip`
 `source devel/setup.bash`
 `roslaunch ae86_bot display.launch`
 
+## 📂 Files
+
+ae86_bot/urdf/ae86_bot.xacro → URDF/XACRO robot description.
+
+ae86_bot/launch/display.launch → Launch file for RViz.
+
+ae86_bot/launch/gazebo.launch → Launch file for Gazebo.
+
+CMakeLists.txt & package.xml → Catkin build files
+
+
+---
+
+## ⚙️ Part 2: 3D Transformations (HTM)
+
 ## 📂 Files  
 
 - `transformation.py` → Python implementation of HTM transformations.  
 
----
 
 ## ▶️ Run Instructions  
 
